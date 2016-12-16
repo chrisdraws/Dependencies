@@ -1,14 +1,21 @@
 "use strict"
 
 let acorn = require('acorn'),
-  fs = require('fs'),
-  newValue,
+  fs = require('fs');
+
+
+fs.readFile(process.argv[2],'utf8',function(err, results){
+ let newValue,
   resultsObject = {},
   returnedValue = "This file contained no dependent modules.";
 
-fs.readFile(process.argv[2],'utf8',function(err, results){
+  if(err){
+    console.error(err);
+    console.log(returnedValue);
+    return;
+  } else {
 
-    newValue = acorn.parse(results).body;
+    newValue = acorn.parse(results,{"allowHashBang":"true"}).body;
 
     for (var key in newValue) {
       if (newValue.hasOwnProperty(key)) {
@@ -37,7 +44,7 @@ fs.readFile(process.argv[2],'utf8',function(err, results){
     if(JSON.stringify(resultsObject, null, 2) !== "{}") {
         returnedValue = JSON.stringify(resultsObject, null, 2);
     }
-
+  }
     console.log(returnedValue);
 
 });
