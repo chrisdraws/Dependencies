@@ -6,12 +6,14 @@ You've discovered what may be quite simply the easiest way to find out what depe
 
 On your command line run something like the following:
 
+```
   node dependencies.js /file/path/filename.js
+```
 
   Where dependencies.js is the file name you are executing and the "/file/path/filename.js" is the file you want to parse using acorn
 
 ## results
-
+```
 {
   "fs":"fs",
   "path":"path",
@@ -19,7 +21,7 @@ On your command line run something like the following:
   "http":"http"
 
 }
-
+```
 
 ## Acorn
 
